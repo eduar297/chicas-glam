@@ -70,10 +70,10 @@ const Hero = () => {
             </div>
 
             {/* Hero Image/Illustration */}
-            <div className="order-1 lg:order-2 flex justify-center lg:justify-end">
+            <div className="order-1 lg:order-2 flex justify-center lg:justify-end mt-8 lg:mt-0">
               <div className="relative w-full max-w-lg animate-float">
                 {/* Main Circle */}
-                <div className="relative w-80 h-80 md:w-96 md:h-96 mx-auto">
+                <div className="relative w-72 h-72 md:w-80 md:h-80 lg:w-96 lg:h-96 mx-auto">
                   {/* Background Circle with Gradient */}
                   <div className="absolute inset-0 bg-gradient-to-br from-rose-300 via-rose-200 to-nude-200 rounded-full shadow-2xl"></div>
                   

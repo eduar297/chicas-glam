@@ -11,8 +11,8 @@
       },
       {
         "id": 2,
-        "name": "Tinte de cejas",
-        "description": "Color duradero y natural",
+        "name": "Tinte",
+        "description": "Color duradero y natural para cejas",
         "price": "$350 CUP",
         "duration": "25 min"
       },
@@ -96,38 +96,59 @@
     "services": [
       {
         "id": 12,
-        "name": "Limpieza Facial Completa",
-        "description": "Vapor, microdermoabrasión, extracciones",
+        "name": "Vapor",
+        "description": "Apertura de poros con vapor caliente",
         "price": "Consultar",
-        "duration": "90 min"
+        "duration": "20 min"
       },
       {
         "id": 13,
-        "name": "Exfoliación y Mascarillas",
-        "description": "Exfoliación profunda + mascarillas hidratantes",
-        "price": "Consultar",
-        "duration": "75 min"
-      },
-      {
-        "id": 14,
-        "name": "Alta Frecuencia",
-        "description": "Tratamiento con alta frecuencia",
+        "name": "Microdermoabrasión",
+        "description": "Exfoliación profunda con microdermoabrasión",
         "price": "Consultar",
         "duration": "45 min"
       },
       {
-        "id": 15,
-        "name": "Dermaplanning",
-        "description": "Exfoliación con bisturí especializado",
+        "id": 14,
+        "name": "Extracciones",
+        "description": "Limpieza profunda de puntos negros",
         "price": "Consultar",
-        "duration": "60 min"
+        "duration": "30 min"
+      },
+      {
+        "id": 15,
+        "name": "Exfoliación",
+        "description": "Renovación celular profunda",
+        "price": "Consultar",
+        "duration": "25 min"
       },
       {
         "id": 16,
+        "name": "Mascarillas hidratantes",
+        "description": "Hidratación intensiva facial",
+        "price": "Consultar",
+        "duration": "30 min"
+      },
+      {
+        "id": 17,
+        "name": "Alta Frecuencia",
+        "description": "Tratamiento con corriente de alta frecuencia",
+        "price": "Consultar",
+        "duration": "20 min"
+      },
+      {
+        "id": 18,
+        "name": "Dermaplanning",
+        "description": "Exfoliación con bisturí especializado",
+        "price": "Consultar",
+        "duration": "40 min"
+      },
+      {
+        "id": 19,
         "name": "Dermoterapia Capilar",
         "description": "Tratamiento especializado del cuero cabelludo",
         "price": "Consultar",
-        "duration": "60 min"
+        "duration": "50 min"
       }
     ]
   },
@@ -135,56 +156,56 @@
     "category": "Manicura",
     "services": [
       {
-        "id": 17,
+        "id": 20,
         "name": "Manicura natural",
         "description": "Cuidado básico de manos y uñas",
         "price": "$200 CUP",
         "duration": "45 min"
       },
       {
-        "id": 18,
+        "id": 21,
         "name": "Esmaltado semipermanente",
         "description": "Duración de hasta 3 semanas",
         "price": "$500 CUP",
         "duration": "60 min"
       },
       {
-        "id": 19,
+        "id": 22,
         "name": "Gel de construcción",
         "description": "Fortalecimiento y extensión con gel",
         "price": "$1200 CUP",
         "duration": "90 min"
       },
       {
-        "id": 20,
+        "id": 23,
         "name": "Base Rubber",
         "description": "Base flexible y resistente",
         "price": "$1200 CUP",
         "duration": "75 min"
       },
       {
-        "id": 21,
+        "id": 24,
         "name": "Dipping",
         "description": "Técnica de inmersión en polvo",
         "price": "$1200 CUP",
         "duration": "80 min"
       },
       {
-        "id": 22,
+        "id": 25,
         "name": "Uñas esculpidas",
         "description": "Extensiones con formas personalizadas",
         "price": "$1500 CUP",
         "duration": "120 min"
       },
       {
-        "id": 23,
+        "id": 26,
         "name": "Poligel",
         "description": "Híbrido entre gel y acrílico",
         "price": "$1800 CUP",
         "duration": "110 min"
       },
       {
-        "id": 24,
+        "id": 27,
         "name": "Soft Gel",
         "description": "Gel suave y flexible",
         "price": "$2000 CUP",
@@ -196,21 +217,21 @@
     "category": "Acrílico",
     "services": [
       {
-        "id": 25,
+        "id": 28,
         "name": "Uñas acrílicas cortas",
         "description": "Extensiones acrílicas cortas",
         "price": "$1500 CUP",
         "duration": "90 min"
       },
       {
-        "id": 26,
+        "id": 29,
         "name": "Uñas acrílicas medianas",
         "description": "Extensiones acrílicas medianas",
         "price": "$2000 CUP",
         "duration": "105 min"
       },
       {
-        "id": 27,
+        "id": 30,
         "name": "Uñas acrílicas largas",
         "description": "Extensiones acrílicas largas",
         "price": "$2800 CUP",
@@ -222,25 +243,11 @@
     "category": "Pedicure",
     "services": [
       {
-        "id": 28,
+        "id": 31,
         "name": "Pedicure Completo",
-        "description": "Hidromasaje, limpieza profunda, eliminación de callosidades",
+        "description": "Hidromasaje, limpieza profunda de uñas y cutículas, eliminación de callosidades, limpieza de carcañales, exfoliación profunda y esmaltado semipermanente",
         "price": "$1500 CUP",
         "duration": "90 min"
-      },
-      {
-        "id": 29,
-        "name": "Limpieza de carcañales",
-        "description": "Tratamiento especializado para talones",
-        "price": "Incluido",
-        "duration": "20 min"
-      },
-      {
-        "id": 30,
-        "name": "Exfoliación profunda + Esmaltado",
-        "description": "Exfoliación completa con esmaltado semipermanente",
-        "price": "Incluido",
-        "duration": "30 min"
       }
     ]
   }

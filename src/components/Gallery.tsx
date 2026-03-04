@@ -1,19 +1,43 @@
 import { useState } from 'react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Pagination, Zoom, Thumbs, FreeMode } from 'swiper/modules';
+
+// Import Swiper styles
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import 'swiper/css/zoom';
+import 'swiper/css/free-mode';
+import 'swiper/css/thumbs';
 
 const Gallery = () => {
   const [activeTab, setActiveTab] = useState<'gallery' | 'transformations'>('gallery');
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [thumbsSwiper, setThumbsSwiper] = useState<any>(null);
 
-  // Placeholder images - En producción se reemplazarían por imágenes reales
+  // Actualizar imágenes de la galería con mejores URLs
   const galleryImages = [
-    { id: 1, src: 'https://images.unsplash.com/photo-1560066984-138dadb4c035?w=400', alt: 'Salon Interior 1' },
-    { id: 2, src: 'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=400', alt: 'Salon Interior 2' },
-    { id: 3, src: 'https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?w=400', alt: 'Nail Art 1' },
-    { id: 4, src: 'https://images.unsplash.com/photo-1604654894610-df63bc536371?w=400', alt: 'Hair Treatment' },
-    { id: 5, src: 'https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?w=400', alt: 'Eyebrow Treatment' },
-    { id: 6, src: 'https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=400', alt: 'Facial Treatment' },
-    { id: 7, src: 'https://images.unsplash.com/photo-1555716024-4686c5d19a49?w=400', alt: 'Nail Art 2' },
-    { id: 8, src: 'https://images.unsplash.com/photo-1583001931096-959e9a1a6223?w=400', alt: 'Spa Environment' },
+    { id: 1, src: 'https://images.unsplash.com/photo-1560066984-138dadb4c035?w=800', thumb: 'https://images.unsplash.com/photo-1560066984-138dadb4c035?w=300', alt: 'Salón Interior 1' },
+    { id: 2, src: 'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=800', thumb: 'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=300', alt: 'Salón Interior 2' },
+    { id: 3, src: 'https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?w=800', thumb: 'https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?w=300', alt: 'Nail Art 1' },
+    { id: 4, src: 'https://images.unsplash.com/photo-1604654894610-df63bc536371?w=800', thumb: 'https://images.unsplash.com/photo-1604654894610-df63bc536371?w=300', alt: 'Tratamiento Capilar' },
+    { id: 5, src: 'https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?w=800', thumb: 'https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?w=300', alt: 'Tratamiento de Cejas' },
+    { id: 6, src: 'https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=800', thumb: 'https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=300', alt: 'Tratamiento Facial' },
+    { id: 7, src: 'https://images.unsplash.com/photo-1555716024-4686c5d19a49?w=800', thumb: 'https://images.unsplash.com/photo-1555716024-4686c5d19a49?w=300', alt: 'Nail Art 2' },
+    { id: 8, src: 'https://images.unsplash.com/photo-1583001931096-959e9a1a6223?w=800', thumb: 'https://images.unsplash.com/photo-1583001931096-959e9a1a6223?w=300', alt: 'Ambiente Spa' },
   ];
+
+  const openLightbox = (index: number) => {
+    setCurrentImageIndex(index);
+    setLightboxOpen(true);
+    document.body.style.overflow = 'hidden'; // Prevent scrolling
+  };
+
+  const closeLightbox = () => {
+    setLightboxOpen(false);
+    document.body.style.overflow = 'auto'; // Restore scrolling
+  };
 
   const transformations = [
     {
@@ -89,23 +113,33 @@ const Gallery = () => {
           </div>
         </div>
 
-        {/* Gallery Content - Mobile First */}
+        {/* Gallery Content - Mobile First with Lightbox */}
         {activeTab === 'gallery' && (
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-4 lg:gap-6">
-            {galleryImages.map((image) => (
+            {galleryImages.map((image, index) => (
               <div
                 key={image.id}
-                className="group relative overflow-hidden rounded-lg md:rounded-2xl shadow-md md:shadow-lg hover:shadow-xl transition-all duration-300 aspect-square"
+                className="group relative overflow-hidden rounded-lg md:rounded-2xl shadow-md md:shadow-lg hover:shadow-xl transition-all duration-300 aspect-square cursor-pointer"
+                onClick={() => openLightbox(index)}
               >
                 <img
-                  src={image.src}
+                  src={image.thumb}
                   alt={image.alt}
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <div className="absolute bottom-2 md:bottom-4 left-2 md:left-4 text-white">
-                    <p className="font-medium text-xs md:text-sm">{image.alt}</p>
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-all duration-300 flex items-center justify-center">
+                  <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <div className="bg-white/20 backdrop-blur-sm rounded-full p-3">
+                      <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
+                      </svg>
+                    </div>
                   </div>
+                </div>
+                <div className="absolute bottom-2 md:bottom-4 left-2 md:left-4 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <p className="font-medium text-xs md:text-sm bg-black/50 backdrop-blur-sm rounded px-2 py-1">
+                    {image.alt}
+                  </p>
                 </div>
               </div>
             ))}
@@ -187,6 +221,92 @@ const Gallery = () => {
           </div>
         )}
       </div>
+
+      {/* Lightbox Modal */}
+      {lightboxOpen && (
+        <div className="fixed inset-0 z-50 bg-black/90 backdrop-blur-sm flex items-center justify-center p-4">
+          {/* Close Button */}
+          <button
+            onClick={closeLightbox}
+            className="absolute top-4 right-4 z-60 bg-white/20 hover:bg-white/30 text-white rounded-full p-2 transition-all duration-200"
+          >
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+
+          {/* Image Counter */}
+          <div className="absolute top-4 left-4 z-60 bg-black/50 text-white px-3 py-1 rounded-full text-sm">
+            {currentImageIndex + 1} / {galleryImages.length}
+          </div>
+
+          {/* Main Swiper */}
+          <div className="w-full max-w-4xl mx-auto">
+            <Swiper
+              modules={[Navigation, Pagination, Zoom, Thumbs]}
+              initialSlide={currentImageIndex}
+              navigation={true}
+              pagination={{ clickable: true }}
+              zoom={{ maxRatio: 3 }}
+              thumbs={{ swiper: thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null }}
+              className="lightbox-swiper"
+              onSlideChange={(swiper) => setCurrentImageIndex(swiper.activeIndex)}
+            >
+              {galleryImages.map((image) => (
+                <SwiperSlide key={image.id}>
+                  <div className="swiper-zoom-container flex items-center justify-center h-[70vh]">
+                    <img
+                      src={image.src}
+                      alt={image.alt}
+                      className="max-w-full max-h-full object-contain rounded-lg shadow-2xl"
+                    />
+                  </div>
+                  <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-black/50 text-white px-4 py-2 rounded-full text-center">
+                    <p className="font-medium">{image.alt}</p>
+                  </div>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+
+            {/* Thumbnails */}
+            <div className="mt-4">
+              <Swiper
+                modules={[FreeMode, Thumbs]}
+                onSwiper={setThumbsSwiper}
+                slidesPerView={4}
+                spaceBetween={10}
+                freeMode={true}
+                watchSlidesProgress={true}
+                breakpoints={{
+                  640: {
+                    slidesPerView: 6,
+                  },
+                  768: {
+                    slidesPerView: 8,
+                  }
+                }}
+                className="thumbs-swiper"
+              >
+                {galleryImages.map((image, index) => (
+                  <SwiperSlide key={`thumb-${image.id}`}>
+                    <div 
+                      className={`relative aspect-square rounded cursor-pointer overflow-hidden ${
+                        index === currentImageIndex ? 'ring-2 ring-rose-500' : ''
+                      }`}
+                    >
+                      <img
+                        src={image.thumb}
+                        alt={image.alt}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                  </SwiperSlide>
+                ))}
+              </Swiper>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 };
