@@ -1,0 +1,74 @@
+Crea un proyecto completo en React Tailwind CSS para una página web de un salón de belleza.
+
+Requisitos del proyecto:
+
+1) Usar React + Vite.
+2) Usar Tailwind CSS para todos los estilos, y algunos estilos personalizados.
+3) El diseño debe ser limpio, moderno, femenino y minimalista.
+4) Usar colores suaves como nude, beige, rosa claro y blanco.
+5) Diseño responsive (mobile first).
+6) No usar backend.
+7) Todos los servicios deben cargarse desde un archivo JSON local.
+8) Estructura de carpetas limpia y organizada.
+9) Código limpio y listo para producción.
+
+Estructura del proyecto:
+
+/src
+  /components
+    Navbar.jsx
+    Hero.jsx
+    Services.jsx
+    Gallery.jsx
+    Contact.jsx
+    Footer.jsx
+  /data
+    services.json
+  App.jsx
+  main.jsx
+
+FUNCIONALIDADES:
+
+- Navbar fija arriba con el nombre del salón y enlaces (Inicio, Servicios, Galería, Contacto).
+- Navegación con smooth scrolling.
+- Sección Hero con:
+  - Título grande y elegante
+  - Subtítulo
+  - Botón "Reservar por WhatsApp"
+- Sección de Servicios:
+  - Cargar servicios desde /data/services.json
+  - Agrupar por categoría (Uñas, Pelo, Cejas y Pestañas, Facial, Talones)
+  - Cada servicio debe mostrar nombre y precio
+  - Usar tarjetas con bordes redondeados, sombras suaves y efectos hover elegantes
+- Sección Galería:
+  - Grid responsive con imágenes de ejemplo (placeholders)
+  - Efecto hover suave en las imágenes
+- Sección Contacto:
+  - Dirección
+  - Horarios
+  - Botón de WhatsApp con enlace https://wa.me/
+  - Link a Instagram
+- Footer minimalista con copyright
+
+ESTRUCTURA DEL services.json:
+
+[
+  {
+    "category": "Uñas",
+    "items": [
+      { "name": "Esmaltado común", "price": 500 },
+      { "name": "Semipermanente", "price": 850 }
+    ]
+  }
+]
+
+ESTILO:
+
+- Usar clases de Tailwind.
+- Espaciados amplios y diseño elegante.
+- Sombras suaves.
+- Bordes redondeados (rounded-xl o rounded-2xl).
+- Transiciones suaves (transition, duration, ease).
+- Tipografía moderna y limpia.
+
+El resultado debe ser una landing page profesional, lista para desplegar en Vercel.
