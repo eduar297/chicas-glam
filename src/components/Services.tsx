@@ -53,20 +53,24 @@ const Services = () => {
           </p>
         </div>
 
-        {/* Category Tabs */}
-        <div className="flex flex-wrap justify-center gap-2 md:gap-4 mb-8 md:mb-12 px-2">
+        {/* Category Tabs - Mobile First with Text Always Visible */}
+        <div className="flex flex-wrap justify-center gap-2 md:gap-3 mb-8 md:mb-12 px-2">
           {services.map((serviceCategory) => (
             <button
               key={serviceCategory.category}
               onClick={() => setSelectedCategory(serviceCategory.category)}
-              className={`px-3 md:px-6 py-2 md:py-3 rounded-full font-medium transition-all duration-300 flex items-center space-x-1 md:space-x-2 text-sm md:text-base ${
+              className={`px-3 md:px-4 py-2 md:py-3 rounded-full font-medium transition-all duration-300 flex flex-col sm:flex-row items-center justify-center space-y-1 sm:space-y-0 sm:space-x-2 text-xs md:text-base min-w-[70px] md:min-w-auto ${
                 selectedCategory === serviceCategory.category
                   ? 'bg-gradient-to-r from-rose-500 to-rose-600 text-white shadow-lg'
                   : 'bg-white text-gray-700 hover:bg-rose-50 hover:text-rose-600 border border-gray-200'
               }`}
             >
-              <span className="text-base md:text-lg">{getCategoryIcon(serviceCategory.category)}</span>
-              <span className="hidden sm:inline">{serviceCategory.category}</span>
+              <span className="text-lg md:text-xl">{getCategoryIcon(serviceCategory.category)}</span>
+              <span className="text-center leading-tight">
+                {serviceCategory.category === 'Extensiones de Pestañas' ? 'Pestañas' : 
+                 serviceCategory.category === 'Limpiezas Faciales' ? 'Faciales' : 
+                 serviceCategory.category}
+              </span>
             </button>
           ))}
         </div>
