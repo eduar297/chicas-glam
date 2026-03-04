@@ -1,20 +1,9 @@
 import { useState } from 'react';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination, Zoom, Thumbs, FreeMode } from 'swiper/modules';
-
-// Import Swiper styles
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
-import 'swiper/css/zoom';
-import 'swiper/css/free-mode';
-import 'swiper/css/thumbs';
 
 const Gallery = () => {
   const [activeTab, setActiveTab] = useState<'gallery' | 'transformations'>('gallery');
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [thumbsSwiper, setThumbsSwiper] = useState<any>(null);
 
   // Actualizar imágenes de la galería con mejores URLs
   const galleryImages = [
@@ -31,12 +20,20 @@ const Gallery = () => {
   const openLightbox = (index: number) => {
     setCurrentImageIndex(index);
     setLightboxOpen(true);
-    document.body.style.overflow = 'hidden'; // Prevent scrolling
+    document.body.style.overflow = 'hidden';
   };
 
   const closeLightbox = () => {
     setLightboxOpen(false);
-    document.body.style.overflow = 'auto'; // Restore scrolling
+    document.body.style.overflow = 'auto';
+  };
+
+  const nextImage = () => {
+    setCurrentImageIndex((prev) => (prev + 1) % galleryImages.length);
+  };
+
+  const prevImage = () => {
+    setCurrentImageIndex((prev) => (prev - 1 + galleryImages.length) % galleryImages.length);
   };
 
   const transformations = [
@@ -222,7 +219,7 @@ const Gallery = () => {
         )}
       </div>
 
-      {/* Lightbox Modal */}
+      {/* Simple Lightbox Modal */}
       {lightboxOpen && (
         <div className="fixed inset-0 z-50 bg-black/90 backdrop-blur-sm flex items-center justify-center p-4">
           {/* Close Button */}
@@ -240,69 +237,58 @@ const Gallery = () => {
             {currentImageIndex + 1} / {galleryImages.length}
           </div>
 
-          {/* Main Swiper */}
-          <div className="w-full max-w-4xl mx-auto">
-            <Swiper
-              modules={[Navigation, Pagination, Zoom, Thumbs]}
-              initialSlide={currentImageIndex}
-              navigation={true}
-              pagination={{ clickable: true }}
-              zoom={{ maxRatio: 3 }}
-              thumbs={{ swiper: thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null }}
-              className="lightbox-swiper"
-              onSlideChange={(swiper) => setCurrentImageIndex(swiper.activeIndex)}
-            >
-              {galleryImages.map((image) => (
-                <SwiperSlide key={image.id}>
-                  <div className="swiper-zoom-container flex items-center justify-center h-[70vh]">
-                    <img
-                      src={image.src}
-                      alt={image.alt}
-                      className="max-w-full max-h-full object-contain rounded-lg shadow-2xl"
-                    />
-                  </div>
-                  <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-black/50 text-white px-4 py-2 rounded-full text-center">
-                    <p className="font-medium">{image.alt}</p>
-                  </div>
-                </SwiperSlide>
-              ))}
-            </Swiper>
+          {/* Previous Button */}
+          <button
+            onClick={prevImage}
+            className="absolute left-4 top-1/2 transform -translate-y-1/2 z-60 bg-black/50 hover:bg-black/70 text-white rounded-full p-3 transition-all duration-200"
+          >
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+            </svg>
+          </button>
+
+          {/* Next Button */}
+          <button
+            onClick={nextImage}
+            className="absolute right-4 top-1/2 transform -translate-y-1/2 z-60 bg-black/50 hover:bg-black/70 text-white rounded-full p-3 transition-all duration-200"
+          >
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
+
+          {/* Main Image */}
+          <div className="w-full max-w-4xl mx-auto flex flex-col items-center">
+            <div className="relative w-full h-[60vh] md:h-[70vh] flex items-center justify-center">
+              <img
+                src={galleryImages[currentImageIndex].src}
+                alt={galleryImages[currentImageIndex].alt}
+                className="max-w-full max-h-full object-contain rounded-lg shadow-2xl"
+              />
+            </div>
+            
+            {/* Image Description */}
+            <div className="mt-4 bg-black/50 text-white px-4 py-2 rounded-full text-center">
+              <p className="font-medium">{galleryImages[currentImageIndex].alt}</p>
+            </div>
 
             {/* Thumbnails */}
-            <div className="mt-4">
-              <Swiper
-                modules={[FreeMode, Thumbs]}
-                onSwiper={setThumbsSwiper}
-                slidesPerView={4}
-                spaceBetween={10}
-                freeMode={true}
-                watchSlidesProgress={true}
-                breakpoints={{
-                  640: {
-                    slidesPerView: 6,
-                  },
-                  768: {
-                    slidesPerView: 8,
-                  }
-                }}
-                className="thumbs-swiper"
-              >
-                {galleryImages.map((image, index) => (
-                  <SwiperSlide key={`thumb-${image.id}`}>
-                    <div 
-                      className={`relative aspect-square rounded cursor-pointer overflow-hidden ${
-                        index === currentImageIndex ? 'ring-2 ring-rose-500' : ''
-                      }`}
-                    >
-                      <img
-                        src={image.thumb}
-                        alt={image.alt}
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-                  </SwiperSlide>
-                ))}
-              </Swiper>
+            <div className="mt-4 flex space-x-2 overflow-x-auto pb-2 max-w-full">
+              {galleryImages.map((image, index) => (
+                <button
+                  key={`thumb-${image.id}`}
+                  onClick={() => setCurrentImageIndex(index)}
+                  className={`relative flex-shrink-0 w-16 h-16 md:w-20 md:h-20 rounded overflow-hidden ${
+                    index === currentImageIndex ? 'ring-2 ring-rose-500' : ''
+                  }`}
+                >
+                  <img
+                    src={image.thumb}
+                    alt={image.alt}
+                    className="w-full h-full object-cover"
+                  />
+                </button>
+              ))}
             </div>
           </div>
         </div>
