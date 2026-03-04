@@ -1,72 +1,156 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-:root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+/* Configuración de Tailwind v4 */
+@theme {
+  --color-nude-50: #faf8f7;
+  --color-nude-100: #f5f0ed;
+  --color-nude-200: #ede2db;
+  --color-nude-300: #e0cfc3;
+  --color-nude-400: #d0b5a4;
+  --color-nude-500: #c19a84;
+  --color-nude-600: #b08569;
+  --color-nude-700: #926d56;
+  --color-nude-800: #785a49;
+  --color-nude-900: #614a3e;
+  
+  --color-rose-50: #fdf2f8;
+  --color-rose-100: #fce7f3;
+  --color-rose-200: #fbcfe8;
+  --color-rose-300: #f9a8d4;
+  --color-rose-400: #f472b6;
+  --color-rose-500: #ec4899;
+  --color-rose-600: #db2777;
+  --color-rose-700: #be185d;
+  --color-rose-800: #9d174d;
+  --color-rose-900: #831843;
+  
+  --color-beige-50: #fdfcfb;
+  --color-beige-100: #faf7f0;
+  --color-beige-200: #f4ede1;
+  --color-beige-300: #ebe0d0;
+  --color-beige-400: #ddd0bb;
+  --color-beige-500: #ccbea3;
+  --color-beige-600: #b8a488;
+  --color-beige-700: #9d8a6e;
+  --color-beige-800: #82725c;
+  --color-beige-900: #6b5e4d;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  --font-family-elegant: 'Playfair Display', serif;
+  --font-family-modern: 'Inter', sans-serif;
+  
+  --animate-fade-in: fade-in 0.6s ease-in-out;
+  --animate-slide-up: slide-up 0.6s ease-out;
+  --animate-float: float 3s ease-in-out infinite;
+}
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
+@keyframes fade-in {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes slide-up {
+  0% { transform: translateY(20px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+/* Importar fuentes de Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* Smooth scrolling para toda la página */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Personalización de scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #ec4899;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #db2777;
+}
+
+/* Animaciones personalizadas */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeInUp {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+/* Efectos de glassmorphism */
+.glass {
+  background: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+/* Reset y personalización base */
+body {
+  margin: 0;
+  font-family: 'Inter', system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
+/* Utility classes personalizadas */
+.bg-pattern {
+  background-image: radial-gradient(circle at 2px 2px, rgba(255,255,255,.15) 1px, transparent 0);
+  background-size: 20px 20px;
 }
 
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
+/* Animación de flotado para elementos decorativos */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
   }
-  a:hover {
-    color: #747bff;
+  50% {
+    transform: translateY(-20px);
   }
-  button {
-    background-color: #f9f9f9;
-  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Efecto de hover para imágenes */
+.hover-zoom {
+  transition: transform 0.3s ease;
+}
+
+.hover-zoom:hover {
+  transform: scale(1.05);
+}
+
+/* Gradient text effect */
+.gradient-text {
+  background: linear-gradient(45deg, #ec4899, #f97316);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }

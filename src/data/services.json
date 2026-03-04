@@ -1,0 +1,53 @@
+[
+  {
+    "category": "Uñas",
+    "items": [
+      { "name": "Esmaltado común", "price": 800 },
+      { "name": "Semipermanente", "price": 1200 },
+      { "name": "Kapping", "price": 1500 },
+      { "name": "Esculpidas", "price": 2000 },
+      { "name": "Press on", "price": 1800 }
+    ]
+  },
+  {
+    "category": "Pelo",
+    "items": [
+      { "name": "Corte y peinado", "price": 1500 },
+      { "name": "Brushing", "price": 1000 },
+      { "name": "Botox capilar", "price": 3500 },
+      { "name": "Alisado", "price": 4000 },
+      { "name": "Color completo", "price": 3000 },
+      { "name": "Mechas", "price": 2500 }
+    ]
+  },
+  {
+    "category": "Cejas y Pestañas",
+    "items": [
+      { "name": "Diseño de cejas", "price": 600 },
+      { "name": "Perfilado", "price": 400 },
+      { "name": "Tinte de cejas", "price": 500 },
+      { "name": "Laminado de cejas", "price": 1200 },
+      { "name": "Extensiones de pestañas", "price": 2000 },
+      { "name": "Lifting de pestañas", "price": 1500 }
+    ]
+  },
+  {
+    "category": "Facial",
+    "items": [
+      { "name": "Limpieza facial", "price": 1800 },
+      { "name": "Hidratación facial", "price": 2000 },
+      { "name": "Peeling facial", "price": 2500 },
+      { "name": "Radiofrecuencia facial", "price": 3000 },
+      { "name": "Microdermoabrasión", "price": 2200 }
+    ]
+  },
+  {
+    "category": "Talones",
+    "items": [
+      { "name": "Belleza de pies", "price": 1000 },
+      { "name": "Spa de pies", "price": 1500 },
+      { "name": "Tratamiento talones agrietados", "price": 1200 },
+      { "name": "Exfoliación pies", "price": 800 }
+    ]
+  }
+]
